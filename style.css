@@ -1,0 +1,294 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.masthead {
+    background-color: #0D1B2E;
+    color: white;
+    padding: 0.8em 2em;
+    text-align: center;
+}
+
+.masthead h1 {
+    margin: 0;
+    font-size: 1.6em;
+}
+
+main {
+    display: flex;
+    height: calc(100vh - 58px);
+}
+
+/* ---- Sidebar ---- */
+.sidebar {
+    width: 270px;
+    min-width: 270px;
+    background-color: #0D1B2E;
+    color: white;
+    padding: 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9em;
+    overflow-y: auto;
+}
+
+.question-label {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #429890;
+    margin: 0 0 4px 0;
+    font-weight: bold;
+}
+
+.prompt-box {
+    background-color: #1a2e47;
+    border-radius: 8px;
+    padding: 0.8em 1em;
+}
+
+#question-text {
+    margin: 0;
+    font-size: 1.05em;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.score-box {
+    display: flex;
+    justify-content: space-between;
+    background-color: #1a2e47;
+    border-radius: 8px;
+    padding: 0.8em 1em;
+}
+
+.score-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-label {
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #429890;
+    font-weight: bold;
+}
+
+.score-value {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+#start-btn, #calibrate-btn {
+    width: 100%;
+    padding: 0.6em;
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#start-btn {
+    background-color: #429890;
+    color: white;
+}
+
+#start-btn:hover {
+    background-color: #357a74;
+}
+
+#calibrate-btn {
+    background-color: #1a2e47;
+    color: #aaa;
+    font-size: 0.8em;
+}
+
+#calibrate-btn:hover {
+    background-color: #E95D0F;
+    color: white;
+}
+
+#calibrate-output {
+    background-color: #1a2e47;
+    border-radius: 6px;
+    padding: 0.5em 0.8em;
+    font-size: 0.85em;
+    color: #fff;
+    word-break: break-all;
+    margin: 0;
+}
+
+/* ---- Feedback panel (below map, NOT a fullscreen overlay) ---- */
+#feedback-panel {
+    position: fixed;
+    bottom: 0;
+    left: 270px;
+    right: 0;
+    padding: 1em 2em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+    gap: 1em;
+}
+
+#feedback-panel.correct {
+    background-color: #06d6a0;
+}
+
+#feedback-panel.incorrect {
+    background-color: #E95D0F;
+}
+
+#feedback-text {
+    margin: 0;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+}
+
+#next-btn {
+    padding: 0.4em 1.2em;
+    font-size: 0.95em;
+    font-weight: bold;
+    background-color: white;
+    color: #0D1B2E;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+#next-btn:hover {
+    background-color: #e0e0e0;
+}
+
+/* ---- Map container ---- */
+#map-container {
+    flex: 1;
+    position: relative;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+/* 
+    The blocker sits on top of the map and intercepts all clicks.
+    When displayed it is fully transparent so the map is still visible,
+    but no click can reach the Google Maps canvas underneath.
+*/
+#map-blocker {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    cursor: not-allowed;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+/* ---- Leaderboard ---- */
+.leaderboard h2 {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #429890;
+    margin: 0 0 0.5em 0;
+    border-bottom: 2px solid #429890;
+    padding-bottom: 0.3em;
+}
+
+#score-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+}
+
+#score-list li {
+    background-color: #1a2e47;
+    padding: 0.5em 0.8em;
+    border-radius: 6px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+#score-list li:first-child {
+    background-color: #429890;
+}
+
+.no-scores {
+    font-weight: normal !important;
+    color: #aaa;
+    background-color: transparent !important;
+}
+
+/* ---- Results overlay ---- */
+#results-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+#results-box {
+    background: white;
+    border-radius: 12px;
+    padding: 2em 2.5em;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    border-top: 8px solid #429890;
+}
+
+#results-box h2 {
+    color: #0D1B2E;
+    margin-top: 0;
+}
+
+#results-text, #results-time {
+    font-size: 1.05em;
+    color: #333;
+    margin-bottom: 0.4em;
+}
+
+#play-again-btn {
+    margin-top: 1em;
+    padding: 0.6em 1.8em;
+    font-size: 1em;
+    font-weight: bold;
+    background-color: #429890;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#play-again-btn:hover {
+    background-color: #357a74;
+}
+
+.hidden {
+    display: none !important;
+}

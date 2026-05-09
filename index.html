@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSUN Campus Map Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="masthead">
+        <h1>CSUN Campus Map Quiz</h1>
+    </header>
+
+    <main>
+
+        <aside class="sidebar">
+
+            <div class="prompt-box">
+                <p class="question-label">Find this location:</p>
+                <p id="question-text">Press Start to begin!</p>
+            </div>
+
+            <div class="score-box">
+                <div class="score-item">
+                    <span class="score-label">Score</span>
+                    <span class="score-value">
+                        <span id="score-display">0</span> / <span id="total-display">5</span>
+                    </span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">Time</span>
+                    <span class="score-value" id="timer-display">0.0s</span>
+                </div>
+            </div>
+
+            <button id="start-btn">Start Quiz</button>
+
+            <!--
+                CALIBRATE: click this, then single-click any spot on the map
+                to see its exact lat/lng. Use those values to fix the questions
+                array in script.js. Remove this button before submitting.
+            -->
+            <button id="calibrate-btn">Calibrate Coords</button>
+            <p id="calibrate-output" class="hidden"></p>
+
+            <div class="leaderboard">
+                <h2>Top Scores</h2>
+                <ul id="score-list">
+                    <li class="no-scores">No scores yet.</li>
+                </ul>
+            </div>
+
+        </aside>
+
+        <!-- Map sits behind a transparent click-catcher div when quiz is inactive -->
+        <div id="map-container">
+            <div id="map"></div>
+            <!-- This div sits on top of the map and is shown/hidden to block clicks -->
+            <div id="map-blocker"></div>
+        </div>
+
+    </main>
+
+    <!-- Feedback panel — NOT an overlay, lives in the sidebar flow -->
+    <div id="feedback-panel" class="hidden">
+        <p id="feedback-text"></p>
+        <button id="next-btn">Next Question</button>
+    </div>
+
+    <!-- Results overlay -->
+    <div id="results-overlay" class="hidden">
+        <div id="results-box">
+            <h2>Quiz Complete!</h2>
+            <p id="results-text"></p>
+            <p id="results-time"></p>
+            <button id="play-again-btn">Play Again</button>
+        </div>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKLeWROzAuRdaOhBaao-PfFcQiVxPmLb8&libraries=geometry"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
